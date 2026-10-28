@@ -3,11 +3,11 @@
 // and solve riddles on an old computer terminal
 // in an abandonded antique labratory
 
+mod texts;
 mod style;
+mod typewriter;
 use style::Style;
 
 fn main() {
-    println!("{}", "red text aaaaaaaaa".red());
-    println!("{}", "bold text aaaaaaaaa".green().bold());
-    println!("{}", "red and bold text aaaaaaaa".red().bold());
+    typewriter::typewriter(texts::INTRO.green().italic(), 80);
 }
