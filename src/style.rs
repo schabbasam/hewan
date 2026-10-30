@@ -74,6 +74,14 @@ impl StyledText {
         self.codes.push("4");
         self
     }
+
+    pub fn text(&self) -> &str {
+        &self.text
+    }
+
+    pub(crate) fn codes(&self) -> &[&'static str] {
+        &self.codes
+    }
 }
 
 // implementing the Display trait from std::fmt

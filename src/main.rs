@@ -9,5 +9,5 @@ mod typewriter;
 use style::Style;
 
 fn main() {
-    typewriter::typewriter(texts::INTRO.green().italic(), 80);
+    typewriter::typewriter(&texts::INTRO.green().italic(), 100);
 }
