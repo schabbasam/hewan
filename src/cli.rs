@@ -1,6 +1,6 @@
 
 use std::io::{self, Write};
-use crate::style::{Style, StyledText};
+use crate::style::{self, Style, StyledText};
 use std::sync::LazyLock;
 
 static PROMPT: LazyLock<StyledText> = LazyLock::new(|| ">> ".green().bold());
@@ -15,5 +15,28 @@ pub fn run() {
         let mut input = String::new();
         io::stdin().read_line(&mut input).expect("read line failed");
         let cmd: Vec<&str> = input.trim().split_whitespace().collect();
+
+        match cmd.first() {
+            Some(&"exit") => {
+                break;
+            }
+            Some(&"clear") => {
+                style::clear_screen();
+            }
+            Some(&"help") => {
+                println!("{}", "you arent getting any help".red());
+                style::clear_styling();
+            }
+            Some(_) => {
+                println!("{0} {1} {2}", 
+                    "idk what".green().italic(), 
+                    input.trim(),
+                    "is supposed to mean");
+                style::clear_styling();
+            }
+            None => {
+                print!(">");
+            }
+        }
     }
 }
