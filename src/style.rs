@@ -93,7 +93,7 @@ impl fmt::Display for StyledText {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!( // i suppose this macro creates a fmt::Result
             f,
-            "\x1b[{codes}m{text}\x1b[0m",
+            "\x1b[{codes}m{text}",
             // the line below joins all elements of the Vec seperated by ;
             codes=self.codes.join(";"),
             text=self.text
@@ -101,3 +101,10 @@ impl fmt::Display for StyledText {
     }
 }
 
+pub fn clear_styling() {
+    print!("\x1b[0m");
+}
+
+pub fn clear_screen() {
+    print!("\x1b[2J\x1b[H");
+}
