@@ -1,4 +1,6 @@
 
+use crate::style::*;
+
 pub struct Command {
     pub name: &'static str,
     pub description: &'static str,
@@ -24,8 +26,13 @@ pub const COMMANDS: &[Command] = &[
 ];
 
 pub fn help() {
+    set_style(Color::Yellow, Weight::Bold, Decoration::Normal);
     println!("available commands:");
     for command in COMMANDS {
-        println!("{:<12} {}", command.name, command.description);
+        set_style(Color::Green, Weight::Bold, Decoration::Italic);
+        print!("{:<12}", command.name);
+        set_style(Color::Blue, Weight::Normal, Decoration::Normal);
+        println!("{}", command.description);
+        
     }
 }

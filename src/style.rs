@@ -16,7 +16,7 @@ pub enum Decoration {
     Normal, Italic, Underline
 }
 
-pub fn set_style(color: &Color, weight: &Weight, decoration: &Decoration) {
+pub fn set_style(color: Color, weight: Weight, decoration: Decoration) {
     let color_code = match color {
         Color::Red      => 31,
         Color::Green    => 32,
@@ -74,7 +74,7 @@ pub fn test() {
     for color in &colors {
         for weight in &weights {
             for dec in &decs {
-                set_style(color, weight, dec);
+                set_style(*color, *weight, *dec);
                 println!("This text is {:?}, {:?} and {:?}.",
                     color, weight, dec);
             }

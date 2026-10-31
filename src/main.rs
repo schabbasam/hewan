@@ -13,6 +13,5 @@ use crate::style::*;
 
 fn main() {
 //    typewriter::typewriter(&texts::INTRO.green().italic(), 100);
-//    cli::run();
-    test();
+    cli::run();
 }
