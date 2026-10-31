@@ -9,7 +9,6 @@ mod texts;
 mod style;
 mod typewriter;
 
-use crate::style::*;
 
 fn main() {
 //    typewriter::typewriter(&texts::INTRO.green().italic(), 100);

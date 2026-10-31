@@ -16,8 +16,43 @@ pub enum Decoration {
     Normal, Italic, Underline
 }
 
-pub fn set_style(color: Color, weight: Weight, decoration: Decoration) {
-    let color_code = match color {
+#[derive(Clone, Copy, Debug)]
+pub struct Style {
+    pub color: Color,
+    pub weight: Weight,
+    pub decoration: Decoration
+}
+
+impl Style {
+    pub const PROMPT: Self = Self {
+        color: Color::Green,
+        weight: Weight::Bold,
+        decoration: Decoration::Normal
+    };
+    pub const HEADING: Self = Self {
+        color: Color::Yellow,
+        weight: Weight::Bold,
+        decoration: Decoration::Normal
+    };
+    pub const CMD_NAME: Self = Self {
+        color: Color::Green,
+        weight: Weight::Bold,
+        decoration: Decoration::Italic
+    };
+    pub const ERROR: Self = Self {
+        color: Color::Red,
+        weight: Weight::Normal,
+        decoration: Decoration::Normal
+    };
+    pub const NORMAL: Self = Self {
+        color: Color::Blue,
+        weight: Weight::Normal,
+        decoration: Decoration::Normal
+    };
+}
+
+pub fn set_style(style: &Style) {
+    let color_code = match style.color {
         Color::Red      => 31,
         Color::Green    => 32,
         Color::Yellow   => 33,
@@ -26,13 +61,13 @@ pub fn set_style(color: Color, weight: Weight, decoration: Decoration) {
         Color::Default  => 39
     };
 
-    let weight_code = match weight {
+    let weight_code = match style.weight {
         Weight::Normal  => 22,
         Weight::Bold    => 1,
         Weight::Dim     => 2
     };
 
-    let decoration_code = match decoration {
+    let decoration_code = match style.decoration {
         Decoration::Normal      => 23,
         Decoration::Underline   => 4,
         Decoration::Italic      => 3
@@ -52,7 +87,7 @@ pub fn clear_screen() {
 
 pub fn test() {
     // should iterate through all combinations to check them out once
-    const colors: [Color; 6] = [
+    const COLORS: [Color; 6] = [
         Color::Red,
         Color::Green,
         Color::Yellow,
@@ -60,23 +95,23 @@ pub fn test() {
         Color::White,
         Color::Default
     ];
-    const weights: [Weight; 3] = [
+    const WEIGHTS: [Weight; 3] = [
         Weight::Normal,
         Weight::Bold,
         Weight::Dim
     ];
-    const decs: [Decoration; 3] = [
+    const DECS: [Decoration; 3] = [
         Decoration::Normal,
         Decoration::Italic,
         Decoration::Underline
     ];
 
-    for color in &colors {
-        for weight in &weights {
-            for dec in &decs {
-                set_style(*color, *weight, *dec);
+    for c in &COLORS {
+        for w in &WEIGHTS {
+            for d in &DECS {
+                set_style(&Style {color: *c, weight: *w, decoration: *d});
                 println!("This text is {:?}, {:?} and {:?}.",
-                    color, weight, dec);
+                    c, w, d);
             }
         }
     }

@@ -6,7 +6,6 @@ use std::{
     time::Duration
 };
 
-use crate::style::*;
 
 // delay in milliseconds
 const NORMAL_DELAY: u64     = 50;

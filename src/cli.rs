@@ -25,7 +25,7 @@ pub fn run() {
                 clear_screen();
             }
             Some(&"help") => {
-                help();
+                help(cmd);
             }
             Some(_) => {
                 println!("{0} {1} {2}", 
