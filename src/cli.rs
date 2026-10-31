@@ -1,7 +1,9 @@
 
 use std::io::{self, Write};
-use crate::style::{self, Style, StyledText};
 use std::sync::LazyLock;
+
+use crate::style::{self, Style, StyledText};
+use crate::commands::*;
 
 static PROMPT: LazyLock<StyledText> = LazyLock::new(|| ">> ".green().bold());
 
@@ -24,8 +26,7 @@ pub fn run() {
                 style::clear_screen();
             }
             Some(&"help") => {
-                println!("{}", "you arent getting any help".red());
-                style::clear_styling();
+                help();
             }
             Some(_) => {
                 println!("{0} {1} {2}", 

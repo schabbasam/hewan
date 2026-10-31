@@ -3,6 +3,7 @@
 // and solve riddles on an old computer terminal
 // in an abandonded antique labratory
 
+mod commands;
 mod cli;
 mod texts;
 mod style;
