@@ -6,24 +6,20 @@ use std::{
     time::Duration
 };
 
-use crate::style::StyledText;
+use crate::style::*;
 
 // delay in milliseconds
 const NORMAL_DELAY: u64     = 50;
 const COMMA_DELAY: u64      = 250;
 const SENTENCE_DELAY: u64   = 500;
 
-pub fn typewriter(text: &StyledText, line_width: usize) {
+pub fn typewriter(text: &String, line_width: usize) {
 
     // this is done to ignore all previous whitespaces and newlines
-    let normalized_text = text.text()
+    let normalized_text = text
         .split_whitespace() // split at whitespaces
         .collect::<Vec<_>>() // create a dynamic Vec with all words
         .join(" "); // join it to a string
-    
-    // all the codes from the given StyledText get activated
-    let codes = text.codes().join(";");
-    print!("\x1b[{codes}m");
     
     // which character in a line we are on
     let mut column = 0;

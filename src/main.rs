@@ -8,9 +8,11 @@ mod cli;
 mod texts;
 mod style;
 mod typewriter;
-use style::{Style, StyledText};
+
+use crate::style::*;
 
 fn main() {
 //    typewriter::typewriter(&texts::INTRO.green().italic(), 100);
-    cli::run();
+//    cli::run();
+    test();
 }

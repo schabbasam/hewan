@@ -1,28 +1,29 @@
 // this file contains the text styling
-
-use std::fmt;
-
 // i want a function to make text formatting easy
 
+#[derive(Clone, Copy, Debug)]
 pub enum Color {
     Red, Green, Yellow, Blue, White, Default
 }
 
+#[derive(Clone, Copy, Debug)]
 pub enum Weight {
     Normal, Bold, Dim
 }
 
+#[derive(Clone, Copy, Debug)]
 pub enum Decoration {
     Normal, Italic, Underline
 }
 
-pub fn set_style(color: Color, weight: Weight, decoration: Decoration) {
+pub fn set_style(color: &Color, weight: &Weight, decoration: &Decoration) {
     let color_code = match color {
         Color::Red      => 31,
         Color::Green    => 32,
         Color::Yellow   => 33,
         Color::Blue     => 34,
-        Color::White    => 39
+        Color::White    => 37,
+        Color::Default  => 39
     };
 
     let weight_code = match weight {
@@ -32,11 +33,12 @@ pub fn set_style(color: Color, weight: Weight, decoration: Decoration) {
     };
 
     let decoration_code = match decoration {
-        Decoration::Normal      => 0,
+        Decoration::Normal      => 23,
         Decoration::Underline   => 4,
         Decoration::Italic      => 3
     };
-
+    
+    clear_style();
     print!("\x1b[{};{};{}m", color_code, weight_code, decoration_code);
 }
 
@@ -50,4 +52,32 @@ pub fn clear_screen() {
 
 pub fn test() {
     // should iterate through all combinations to check them out once
+    const colors: [Color; 6] = [
+        Color::Red,
+        Color::Green,
+        Color::Yellow,
+        Color::Blue,
+        Color::White,
+        Color::Default
+    ];
+    const weights: [Weight; 3] = [
+        Weight::Normal,
+        Weight::Bold,
+        Weight::Dim
+    ];
+    const decs: [Decoration; 3] = [
+        Decoration::Normal,
+        Decoration::Italic,
+        Decoration::Underline
+    ];
+
+    for color in &colors {
+        for weight in &weights {
+            for dec in &decs {
+                set_style(color, weight, dec);
+                println!("This text is {:?}, {:?} and {:?}.",
+                    color, weight, dec);
+            }
+        }
+    }
 }

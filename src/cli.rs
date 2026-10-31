@@ -1,17 +1,16 @@
 
 use std::io::{self, Write};
-use std::sync::LazyLock;
 
-use crate::style::{self, Style, StyledText};
+use crate::style::*;
 use crate::commands::*;
 
-static PROMPT: LazyLock<StyledText> = LazyLock::new(|| ">> ".green().bold());
+static PROMPT: &str = ">> ";
 
 pub fn run() {
     
     loop {
 
-        print!("{}", *PROMPT);
+        print!("{}", PROMPT);
         io::stdout().flush().unwrap();
 
         let mut input = String::new();
@@ -23,17 +22,16 @@ pub fn run() {
                 break;
             }
             Some(&"clear") => {
-                style::clear_screen();
+                clear_screen();
             }
             Some(&"help") => {
                 help();
             }
             Some(_) => {
                 println!("{0} {1} {2}", 
-                    "idk what".green().italic(), 
+                    "idk what", 
                     input.trim(),
                     "is supposed to mean");
-                style::clear_styling();
             }
             None => {
                 print!(">");
