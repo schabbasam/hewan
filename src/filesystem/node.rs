@@ -26,4 +26,11 @@ impl Node {
     pub fn is_directory(&self) -> bool {
         matches!(self, Node::Directory {..})
     }
+
+    pub fn get_children(&self) -> Option<&[Node]> {
+        match self {
+            Node::Directory { children, .. } => Some(children),
+            _ => None
+        }
+    }
 }
