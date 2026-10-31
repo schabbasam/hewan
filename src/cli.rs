@@ -9,7 +9,7 @@ static PROMPT: &str = ">> ";
 pub fn run() {
     
     loop {
-
+        set_style(&Style::PROMPT);
         print!("{}", PROMPT);
         io::stdout().flush().unwrap();
 
@@ -28,10 +28,8 @@ pub fn run() {
                 help(cmd);
             }
             Some(_) => {
-                println!("{0} {1} {2}", 
-                    "idk what", 
-                    input.trim(),
-                    "is supposed to mean");
+                set_style(&Style::ERROR);
+                println!("idk what {} is supposed to mean", input.trim());
             }
             None => {
                 print!(">");

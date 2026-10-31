@@ -73,8 +73,9 @@ pub fn help(cmd: Vec<&str>) {
 
             } else {
                 set_style(&Style::ERROR);
-                println!("error: command '{}' not found", cmd.get(1));
+                println!("error: command '{}' not found", arg);
             }
+        }
     } else {
         set_style(&Style::ERROR);
         println!("wrong usage: expected 1 or 2 arguments, got {}", cmd.len());
